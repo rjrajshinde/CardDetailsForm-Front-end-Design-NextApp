@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap");
+
+:root {
+  --Lineargradient: hsl(249, 99%, 64%) to hsl(278, 94%, 30%);
+  --Red: hsl(0, 100%, 66%);
+
+  --White: hsl(0, 0%, 100%);
+  --Lighgrayishviolet: hsl(270, 3%, 87%);
+  --Dargrayisviolet: hsl(279, 6%, 55%);
+  --Verdarviolet: hsl(278, 68%, 11%);
+}
+
+body {
+  font-family: "Space Grotesk", sans-serif;
+  background: var(--White);
+}
