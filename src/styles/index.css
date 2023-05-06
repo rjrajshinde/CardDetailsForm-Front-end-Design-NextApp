@@ -9,8 +9,23 @@
   --Dargrayisviolet: hsl(279, 6%, 55%);
   --Verdarviolet: hsl(278, 68%, 11%);
 }
-
 body {
   font-family: "Space Grotesk", sans-serif;
-  background: var(--White);
+  background-color: var(--White);
+}
+body::after {
+  content: "";
+  background: url("/assets/bg-main-desktop.png") no-repeat;
+  background-size: cover;
+  width: 35%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+@media screen and (max-width: 750px) {
+  body {
+    background: url("/assets/bg-main-mobile.png") no-repeat;
+  }
 }
