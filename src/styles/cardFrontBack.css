@@ -16,10 +16,33 @@
 }
 
 .cardFrontDiv {
-  background: url("/assets/bg-card-front.png");
+  background-image: url("/assets/bg-card-front.png");
   margin-top: 5rem;
 }
 
 .cardBackDiv {
-  background: url("/assets/bg-card-back.png");
+  background-image: url("/assets/bg-card-back.png");
+  margin-left: 150px;
+}
+
+@media screen and (max-width: 750px) {
+  .cardDiv {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  .cardFrontDiv,
+  .cardBackDiv {
+    width: 20rem;
+    height: 12rem;
+    background-size: contain;
+  }
+
+  .cardFrontDiv {
+    margin-top: 0;
+  }
+  .cardBackDiv {
+    margin-left: 0;
+  }
 }
