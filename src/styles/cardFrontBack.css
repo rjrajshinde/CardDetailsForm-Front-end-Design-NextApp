@@ -1,0 +1,25 @@
+.cardDiv {
+  /* position: absolute; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.cardFrontDiv,
+.cardBackDiv {
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 24rem;
+  height: 13rem;
+  border-radius: 10px;
+}
+
+.cardFrontDiv {
+  background: url("/assets/bg-card-front.png");
+  margin-top: 5rem;
+}
+
+.cardBackDiv {
+  background: url("/assets/bg-card-back.png");
+}

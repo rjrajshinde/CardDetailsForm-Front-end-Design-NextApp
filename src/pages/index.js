@@ -1,3 +1,4 @@
+import CardForm from "@/components/CardForm";
 import CardFrontBack from "@/components/CardFrontBack";
 import Head from "next/head";
 
@@ -12,6 +13,7 @@ export default function Home() {
       </Head>
       <main>
         <CardFrontBack />
+        <CardForm />
       </main>
     </>
   );
