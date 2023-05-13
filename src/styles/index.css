@@ -31,7 +31,7 @@ body::after {
 
 main {
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 1fr 1fr;
 }
 
 @media screen and (max-width: 750px) {

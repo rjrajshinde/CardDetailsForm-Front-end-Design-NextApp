@@ -1,0 +1,42 @@
+.cardFormDiv {
+  /* background-color: red; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cardForm {
+  width: 50%;
+  /* background-color: blue; */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.formGroup .mmyycvv {
+  /* background-color: aqua; */
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+/* .mmyyDiv .mmyy,
+.cvvDiv #cvv {
+  margin-top: 0.5rem;
+} */
+
+/* .mmyyDiv .mmyy {
+  display: flex;
+  gap: 0.5rem;
+} */
+
+.cardFormDiv input[type="text"] {
+  padding: 0.5rem;
+  border-radius: 0.2rem;
+  border: 1px solid var(--Lighgrayishviolet);
+}
