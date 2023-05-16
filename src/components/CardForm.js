@@ -3,41 +3,64 @@ import React from "react";
 export default function CardForm() {
   return (
     <div className="cardFormDiv">
-      <form action="" method="get" className="cardForm">
-        <div className="formGroup">
-          <label>CARDHOLDER NAME</label>
+      <form action="#" method="post" className="form">
+        <div className="field" data-error="false">
+          <label for="cardholderName">Cardholder Name</label>
           <input
             type="text"
-            name="cardName"
-            id="cardName"
-            placeholder="e.g. John Doe"
+            name="name"
+            id="cardholderName"
+            placeholder="e.g. Jane Appleseed"
+            className="input-valid"
           />
         </div>
-        <div className="formGroup">
-          <label>CARD NUMBER</label>
+
+        <div className="field" data-error="false">
+          <label for="fieldCardNumber">Card Number</label>
           <input
             type="text"
-            name="cardNo"
-            id="cardNo"
-            placeholder="e.g. 0000 0000 0000 0000"
+            name="num"
+            id="fieldCardNumber"
+            placeholder="e.g. 1234 5678 9123 0000"
+            maxlength="19"
+            className="input-valid"
           />
         </div>
-        <div>
-          <div className="formGroup">
-            <div className="mmyycvv">
-              <label>EXP. DATE (MM/YY)</label>
-              <div>
-                <input type="text" name="mm" id="mm" placeholder="MM" />
-                <input type="text" name="yy" id="yy" placeholder="YY" />
-              </div>
+        <div className="field-container">
+          <div className="field" data-error="false">
+            <label for="month">Exp. Date (MM/YY)</label>
+            <div>
+              <input
+                type="text"
+                name="month"
+                id="month"
+                placeholder="MM"
+                maxlength="2"
+                className="input-valid"
+              />
+              <input
+                type="text"
+                name="year"
+                id="year"
+                placeholder="YY"
+                maxlength="2"
+                className="input-valid"
+              />
             </div>
           </div>
-          <div className="cvvDiv">
-            <label>CVV</label>
-            <input type="text" name="cvv" id="cvv" placeholder="e.g. 123" />
+          <div className="field" data-error="false">
+            <label for="fieldCardCvc">CVC</label>
+            <input
+              type="text"
+              name="cvc"
+              id="fieldCardCvc"
+              placeholder=" e.g. 123"
+              maxlength="3"
+              className="input-valid"
+            />
           </div>
-          <input type="submit" value="Confirm" className="submitBtn" />
         </div>
+        <input type="submit" value="Confirm" id="submitBtn" />
       </form>
     </div>
   );
