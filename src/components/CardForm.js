@@ -5,7 +5,7 @@ export default function CardForm() {
     <div className="cardFormDiv">
       <form action="#" method="post" className="form">
         <div className="field" data-error="false">
-          <label for="cardholderName">Cardholder Name</label>
+          <label htmlFor="cardholderName">Cardholder Name</label>
           <input
             type="text"
             name="name"
@@ -16,7 +16,7 @@ export default function CardForm() {
         </div>
 
         <div className="field" data-error="false">
-          <label for="fieldCardNumber">Card Number</label>
+          <label htmlFor="fieldCardNumber">Card Number</label>
           <input
             type="text"
             name="num"
@@ -28,7 +28,7 @@ export default function CardForm() {
         </div>
         <div className="field-container">
           <div className="field" data-error="false">
-            <label for="month">Exp. Date (MM/YY)</label>
+            <label htmlFor="month">Exp. Date (MM/YY)</label>
             <div>
               <input
                 type="text"
@@ -49,7 +49,7 @@ export default function CardForm() {
             </div>
           </div>
           <div className="field" data-error="false">
-            <label for="fieldCardCvc">CVC</label>
+            <label htmlFor="fieldCardCvc">CVC</label>
             <input
               type="text"
               name="cvc"

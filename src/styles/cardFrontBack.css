@@ -12,6 +12,7 @@
   width: 24rem;
   height: 13rem;
   border-radius: 10px;
+  color: var(--White);
 }
 
 .cardFrontDiv {
@@ -19,9 +20,53 @@
   margin-top: 5rem;
 }
 
+.cardFrontDiv > img {
+  width: 4rem;
+  padding: 1.5rem;
+}
+
+.cardFrontDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cardFrontDiv > .cardNoDiv {
+  font-size: 1.3rem;
+  letter-spacing: 5px;
+  display: grid;
+  place-items: center;
+  /* position: relative;
+  left: 2rem; */
+}
+
+.cardFrontDiv > .nameMonthYearDiv {
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  margin: 1.2rem;
+  /* margin-right: 2.3rem; */
+}
+
+.cardFrontDiv > .nameMonthYearDiv > .holderName {
+  margin-left: 0.6rem;
+}
+
+.cardFrontDiv > .nameMonthYearDiv > .monthYear {
+  margin-right: 1.1rem;
+}
+
 .cardBackDiv {
   background-image: url("/assets/bg-card-back.png");
   margin-left: 150px;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 78% auto;
+}
+
+.cardBackDiv > .cvv {
+  font-size: 0.9rem;
+  letter-spacing: 2px;
 }
 
 @media screen and (max-width: 750px) {
@@ -39,11 +84,29 @@
   }
 
   .cardFrontDiv {
-    margin-top: -7.35rem;
+    margin-top: -7.33rem;
     margin-right: 3.2rem;
   }
+
+  .cardFrontDiv > .cardNoDiv {
+    font-size: 0.9rem;
+  }
+
+  .cardFrontDiv > .nameMonthYearDiv {
+    font-size: 0.7rem;
+  }
+
+  .cardFrontDiv > .nameMonthYearDiv > .holderName {
+    margin-left: 0.3rem;
+  }
+
+  .cardFrontDiv > .nameMonthYearDiv > .monthYear {
+    margin-right: 0.8rem;
+  }
+
   .cardBackDiv {
     margin-left: 3.2rem;
     margin-top: 2rem;
+    grid-template-columns: 80% auto;
   }
 }
