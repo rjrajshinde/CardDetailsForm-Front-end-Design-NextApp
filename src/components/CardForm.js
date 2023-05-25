@@ -1,6 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { cardformActions } from "@/store/cardform-slice";
 
 export default function CardForm() {
+  const cardHolderNameValue = useSelector(
+    (state) => state.cardForm.cardholderName
+  );
+  const dispatch = useDispatch();
+  console.log(cardHolderNameValue);
+  const changeCardHolderName = (e) => {
+    dispatch(cardformActions.updateCardHolderName(e.target.value));
+  };
+  const changeCardNumber = (e) => {
+    const value = e.target.value;
+    const onlyDigits = value.replace(/\s/g, "").replace(/\D/g, "");
+    const formattedValue = onlyDigits.replace(/(\d{4})/g, "$1 ");
+    dispatch(cardformActions.updateCardNumber(formattedValue));
+  };
+  const changeMonth = (e) => {
+    dispatch(cardformActions.updateMonth(e.target.value));
+  };
+  const changeYear = (e) => {
+    dispatch(cardformActions.updateYear(e.target.value));
+  };
+  const changeCvc = (e) => {
+    dispatch(cardformActions.updateCvc(e.target.value));
+  };
+
   return (
     <div className="cardFormDiv">
       <form action="#" method="post" className="form">
@@ -12,6 +38,7 @@ export default function CardForm() {
             id="cardholderName"
             placeholder="e.g. Jane Appleseed"
             className="input-valid"
+            onChange={changeCardHolderName}
           />
         </div>
 
@@ -22,8 +49,9 @@ export default function CardForm() {
             name="num"
             id="fieldCardNumber"
             placeholder="e.g. 1234 5678 9123 0000"
-            maxlength="19"
+            maxLength="16"
             className="input-valid"
+            onChange={changeCardNumber}
           />
         </div>
         <div className="field-container">
@@ -35,16 +63,18 @@ export default function CardForm() {
                 name="month"
                 id="month"
                 placeholder="MM"
-                maxlength="2"
+                maxLength="2"
                 className="input-valid"
+                onChange={changeMonth}
               />
               <input
                 type="text"
                 name="year"
                 id="year"
                 placeholder="YY"
-                maxlength="2"
+                maxLength="2"
                 className="input-valid"
+                onChange={changeYear}
               />
             </div>
           </div>
@@ -55,8 +85,9 @@ export default function CardForm() {
               name="cvc"
               id="fieldCardCvc"
               placeholder=" e.g. 123"
-              maxlength="3"
+              maxLength="3"
               className="input-valid"
+              onChange={changeCvc}
             />
           </div>
         </div>

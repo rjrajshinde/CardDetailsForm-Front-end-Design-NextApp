@@ -1,6 +1,7 @@
 import CardForm from "@/components/CardForm";
 import CardFrontBack from "@/components/CardFrontBack";
 import Head from "next/head";
+import { useEffect } from "react";
 
 export default function Home() {
   return (
