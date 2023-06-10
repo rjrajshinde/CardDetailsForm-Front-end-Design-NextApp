@@ -1,0 +1,43 @@
+.thankYouDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 5rem 7rem 0 0;
+  gap: 3rem;
+}
+
+.thankYouDiv .subThankYouDiv {
+  text-align: center;
+}
+
+.thankYouDiv .thankYouImg {
+  width: 4rem;
+  height: 4rem;
+}
+
+.thankYouDiv .thankYouHeading {
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+
+  color: var(--Verdarviolet);
+}
+
+.thankYouDiv .thankYouText {
+  color: var(--Dargrayisviolet);
+}
+
+.thankYouDiv .thankYouBtn {
+  width: 60%;
+  letter-spacing: 0.5px;
+  text-align: center;
+  outline: none;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 750px) {
+  .thankYouDiv {
+    padding: 0;
+    margin-top: 2rem;
+  }
+}

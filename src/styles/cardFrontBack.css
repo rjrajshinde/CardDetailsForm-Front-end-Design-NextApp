@@ -50,6 +50,7 @@
 
 .cardFrontDiv > .nameMonthYearDiv > .holderName {
   margin-left: 0.6rem;
+  letter-spacing: 2px;
 }
 
 .cardFrontDiv > .nameMonthYearDiv > .monthYear {

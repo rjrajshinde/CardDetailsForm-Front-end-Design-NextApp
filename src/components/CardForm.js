@@ -1,97 +1,230 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { cardformActions } from "@/store/cardform-slice";
+import { useForm } from "react-hook-form";
+import { getFormValues } from "redux-form";
 
 export default function CardForm() {
-  const cardHolderNameValue = useSelector(
-    (state) => state.cardForm.cardholderName
-  );
+  // const cardHolderNameValue = useSelector(
+  //   (state) => state.cardForm.cardholderName
+  // );
+
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm({
+    mode: "onChange",
+  });
+
+  // const handleOnSubmit = (callback) => async (e) => {
+  //   if (e && e.preventDefault) {
+  //     e.preventDefault();
+  //     e.persist();
+  //   }
+  // };
+
   const dispatch = useDispatch();
-  console.log(cardHolderNameValue);
-  const changeCardHolderName = (e) => {
-    dispatch(cardformActions.updateCardHolderName(e.target.value));
+
+  // const formValue = useSelector((state) => state.cardform);
+
+  const handleInputChange = (e) => {
+    let { name, value } = e.target;
+    if (name === "cardholderName") {
+      value = value.toUpperCase();
+    }
+    if (name === "cardNumber") {
+      const onlyDigits = value.replace(/\s/g, "").replace(/\D/g, "");
+      value = onlyDigits.replace(/(\d{4})/g, "$1 ");
+    }
+    dispatch(cardformActions.updateInputValue({ fieldName: name, value }));
   };
-  const changeCardNumber = (e) => {
-    const value = e.target.value;
-    const onlyDigits = value.replace(/\s/g, "").replace(/\D/g, "");
-    const formattedValue = onlyDigits.replace(/(\d{4})/g, "$1 ");
-    dispatch(cardformActions.updateCardNumber(formattedValue));
+  const isSubmit = useSelector((state) => state.cardForm.isSubmit);
+
+  const onSubmit = (data) => {
+    console.log(data);
+    console.log(Object.keys(errors).length);
+    if (Object.keys(errors).length === 0) {
+      dispatch(cardformActions.updateIsSubmitValue());
+    }
+
+    console.log("isSubmit-----------" + isSubmit);
   };
-  const changeMonth = (e) => {
-    dispatch(cardformActions.updateMonth(e.target.value));
+
+  const validateMonthYear = () => {
+    const monthValue = document.getElementById("month").value;
+    const yearValue = document.getElementById("year").value;
+
+    if (!monthValue || !yearValue) {
+      setError("month", {
+        type: "required",
+        message: "Can't be blank",
+      });
+      setError("year", {
+        type: "required",
+        message: "Can't be blank",
+      });
+      return false;
+    }
+    return true;
   };
-  const changeYear = (e) => {
-    dispatch(cardformActions.updateYear(e.target.value));
-  };
-  const changeCvc = (e) => {
-    dispatch(cardformActions.updateCvc(e.target.value));
-  };
+
+  // console.log(validateMonthAndYear());
 
   return (
     <div className="cardFormDiv">
-      <form action="#" method="post" className="form">
-        <div className="field" data-error="false">
+      <form
+        action=""
+        method="post"
+        className="form"
+        onSubmit={handleSubmit((data) => onSubmit(data, errors))}
+      >
+        <div className="field">
           <label htmlFor="cardholderName">Cardholder Name</label>
           <input
             type="text"
-            name="name"
+            name="cardholderName"
             id="cardholderName"
-            placeholder="e.g. Jane Appleseed"
-            className="input-valid"
-            onChange={changeCardHolderName}
+            placeholder="e.g. John Doe"
+            style={{ borderColor: errors.cardholderName && "red" }}
+            className=""
+            {...register("cardholderName", {
+              required: "Can't be blank",
+              minLength: {
+                value: 3,
+                message: "Holder Name must be at least 3 characters long",
+              },
+            })}
+            onChange={handleInputChange}
           />
+          {errors.cardholderName && (
+            <span className="error">{errors.cardholderName.message}</span>
+          )}
         </div>
 
-        <div className="field" data-error="false">
+        <div className="field">
           <label htmlFor="fieldCardNumber">Card Number</label>
           <input
             type="text"
-            name="num"
-            id="fieldCardNumber"
+            name="cardNumber"
+            id="cardNumber"
             placeholder="e.g. 1234 5678 9123 0000"
             maxLength="16"
-            className="input-valid"
-            onChange={changeCardNumber}
+            className=""
+            style={{ borderColor: errors.cardNumber && "red" }}
+            {...register("cardNumber", {
+              required: "Can't be blank",
+              // valueAsNumber: true,
+              minLength: {
+                value: 16,
+                message: "Card Number must be 16 digits long",
+              },
+              maxLength: {
+                value: 16,
+                message: "Card Number must be 16 digits long",
+              },
+              pattern: {
+                value: /^[0-9]*$/,
+                message: "Card Number must be a Number",
+              },
+            })}
+            onChange={handleInputChange}
           />
+          {errors.cardNumber && (
+            <span className="error">{errors.cardNumber.message}</span>
+          )}
         </div>
         <div className="field-container">
-          <div className="field" data-error="false">
+          <div className="field">
             <label htmlFor="month">Exp. Date (MM/YY)</label>
             <div>
               <input
-                type="text"
+                type="number"
                 name="month"
                 id="month"
                 placeholder="MM"
-                maxLength="2"
-                className="input-valid"
-                onChange={changeMonth}
+                style={{ borderColor: (errors.month || errors.year) && "red" }}
+                {...register("month", {
+                  required: "Can't be blank",
+                  // max: { value: 12, message: "Enter a valid month" },
+                  pattern: {
+                    value: /^[0-9]*$/,
+                    message: "Enter a valid month",
+                  },
+                })}
+                onChange={handleInputChange}
               />
               <input
-                type="text"
+                type="number"
                 name="year"
                 id="year"
-                placeholder="YY"
-                maxLength="2"
-                className="input-valid"
-                onChange={changeYear}
+                style={{ borderColor: (errors.month || errors.year) && "red" }}
+                {...register("year", {
+                  required: "Can't be blank",
+                  pattern: {
+                    value: /^[0-9]*$/,
+                    message: "Enter a valid year",
+                  },
+                })}
+                onChange={handleInputChange}
               />
             </div>
+
+            {/* {errors.month ||
+              (errors.year && (
+                <span className="error">{`Can't be blank`}</span>
+              ))} */}
+            {errors.month || errors.year ? (
+              errors.month?.message == "Enter a valid year" ||
+              errors.year?.message == "Enter a valid year" ? (
+                <span className="error">{`Enter a valid year`}</span>
+              ) : errors.month?.message == "Can't be blank" ||
+                errors.year?.message == "Can't be blank" ? (
+                <span className="error">{`Can't be blank`}</span>
+              ) : (
+                <span style={{ display: "none" }}></span>
+              )
+            ) : (
+              <span style={{ display: "none" }}></span>
+            )}
           </div>
-          <div className="field" data-error="false">
-            <label htmlFor="fieldCardCvc">CVC</label>
+          <div className="field">
+            <label htmlFor="cvc">CVC</label>
             <input
               type="text"
               name="cvc"
-              id="fieldCardCvc"
+              id="cvc"
               placeholder=" e.g. 123"
               maxLength="3"
-              className="input-valid"
-              onChange={changeCvc}
+              className=""
+              style={{ borderColor: errors.cardNumber && "red" }}
+              onChange={handleInputChange}
+              {...register("cvc", {
+                required: "Can't be blank",
+                // valueAsNumber: true,
+                minLength: {
+                  value: 3,
+                  message: "Cvc must be 3 digits long",
+                },
+                maxLength: {
+                  value: 3,
+                  message: "Cvc must be 3 digits long",
+                },
+                pattern: {
+                  value: /^[0-9]*$/,
+                  message: "Cvc must be a Number",
+                },
+              })}
             />
+            {errors.cvc && <span className="error">{errors.cvc.message}</span>}
           </div>
         </div>
-        <input type="submit" value="Confirm" id="submitBtn" />
+        <input
+          type="submit"
+          value="Confirm"
+          id="submitBtn"
+          // disabled={!isValid}
+        />
       </form>
     </div>
   );

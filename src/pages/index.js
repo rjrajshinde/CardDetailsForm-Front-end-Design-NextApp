@@ -1,9 +1,12 @@
 import CardForm from "@/components/CardForm";
 import CardFrontBack from "@/components/CardFrontBack";
+import ThankYou from "@/components/ThankYou";
 import Head from "next/head";
-import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 export default function Home() {
+  const isSubmit = useSelector((state) => state.cardForm.isSubmit);
+  console.log("isSubmit-----------" + isSubmit);
   return (
     <>
       <Head>
@@ -14,7 +17,8 @@ export default function Home() {
       </Head>
       <main>
         <CardFrontBack />
-        <CardForm />
+        {isSubmit ? <ThankYou /> : <CardForm />}
+        {/* <CardForm /> */}
       </main>
     </>
   );

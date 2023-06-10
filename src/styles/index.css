@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
 
 :root {
   --Lineargradient: hsl(249, 99%, 64%) to hsl(278, 94%, 30%);
@@ -32,7 +32,7 @@ body::after {
 
 main {
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: 50% 50%;
 }
 
 @media screen and (max-width: 750px) {

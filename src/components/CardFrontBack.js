@@ -22,7 +22,7 @@ export default function CardFrontBack() {
         </div>
         <div className="nameMonthYearDiv">
           <span className="holderName">
-            {cardholderName ? cardholderName : "Jane Appleseed"}
+            {cardholderName ? cardholderName : "JOHN DOE"}
           </span>
           <span className="monthYear">
             {month ? month : "00"}/{year ? year : "00"}
