@@ -2,13 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { cardformActions } from "@/store/cardform-slice";
 import { useForm } from "react-hook-form";
-import { getFormValues } from "redux-form";
 
 export default function CardForm() {
-  // const cardHolderNameValue = useSelector(
-  //   (state) => state.cardForm.cardholderName
-  // );
-
   const {
     register,
     formState: { errors },
@@ -17,16 +12,7 @@ export default function CardForm() {
     mode: "onChange",
   });
 
-  // const handleOnSubmit = (callback) => async (e) => {
-  //   if (e && e.preventDefault) {
-  //     e.preventDefault();
-  //     e.persist();
-  //   }
-  // };
-
   const dispatch = useDispatch();
-
-  // const formValue = useSelector((state) => state.cardform);
 
   const handleInputChange = (e) => {
     let { name, value } = e.target;
@@ -41,35 +27,16 @@ export default function CardForm() {
   };
   const isSubmit = useSelector((state) => state.cardForm.isSubmit);
 
+  //! ONSUBMIT FUNCTION IF THERE IS NO ERROR THEN SET ISSUBMIT TRUE
   const onSubmit = (data) => {
     console.log(data);
     console.log(Object.keys(errors).length);
     if (Object.keys(errors).length === 0) {
-      dispatch(cardformActions.updateIsSubmitValue());
+      dispatch(cardformActions.setSubmitTrue());
     }
 
     console.log("isSubmit-----------" + isSubmit);
   };
-
-  const validateMonthYear = () => {
-    const monthValue = document.getElementById("month").value;
-    const yearValue = document.getElementById("year").value;
-
-    if (!monthValue || !yearValue) {
-      setError("month", {
-        type: "required",
-        message: "Can't be blank",
-      });
-      setError("year", {
-        type: "required",
-        message: "Can't be blank",
-      });
-      return false;
-    }
-    return true;
-  };
-
-  // console.log(validateMonthAndYear());
 
   return (
     <div className="cardFormDiv">
@@ -146,7 +113,7 @@ export default function CardForm() {
                 style={{ borderColor: (errors.month || errors.year) && "red" }}
                 {...register("month", {
                   required: "Can't be blank",
-                  // max: { value: 12, message: "Enter a valid month" },
+                  max: { value: 12, message: "Enter the correct Month" },
                   pattern: {
                     value: /^[0-9]*$/,
                     message: "Enter a valid month",
@@ -175,8 +142,10 @@ export default function CardForm() {
                 <span className="error">{`Can't be blank`}</span>
               ))} */}
             {errors.month || errors.year ? (
-              errors.month?.message == "Enter a valid year" ||
-              errors.year?.message == "Enter a valid year" ? (
+              errors.month?.message == "Enter the correct Month" ? (
+                <span className="error">{`Enter a 12 month`}</span>
+              ) : errors.month?.message == "Enter a valid year" ||
+                errors.year?.message == "Enter a valid year" ? (
                 <span className="error">{`Enter a valid year`}</span>
               ) : errors.month?.message == "Can't be blank" ||
                 errors.year?.message == "Can't be blank" ? (
@@ -197,11 +166,10 @@ export default function CardForm() {
               placeholder=" e.g. 123"
               maxLength="3"
               className=""
-              style={{ borderColor: errors.cardNumber && "red" }}
+              style={{ borderColor: errors.cvc && "red" }}
               onChange={handleInputChange}
               {...register("cvc", {
                 required: "Can't be blank",
-                // valueAsNumber: true,
                 minLength: {
                   value: 3,
                   message: "Cvc must be 3 digits long",

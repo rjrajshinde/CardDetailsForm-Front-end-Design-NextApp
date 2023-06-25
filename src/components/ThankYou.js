@@ -8,7 +8,7 @@ export default function ThankYou() {
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    dispatch(cardformActions.updateIsSubmitValue());
+    dispatch(cardformActions.setSubmitFalse());
   };
 
   return (

@@ -15,6 +15,25 @@ const cardformSlice = createSlice({
       const { fieldName, value } = action.payload;
       state[fieldName] = value;
     },
+    setSubmitTrue(state) {
+      state.isSubmit = true;
+    },
+    setSubmitFalse(state) {
+      state.cardholderName = "";
+      state.cardNumber = "";
+      state.month = "";
+      state.year = "";
+      state.cvc = "";
+      state.isSubmit = false;
+    },
+    // resetForm(state) {
+    //   state.cardholderName = "";
+    //   state.cardNumber = "";
+    //   state.month = "";
+    //   state.year = "";
+    //   state.cvc = "";
+    //   state.isSubmitted = false;
+    // },
     updateIsSubmitValue(state) {
       state.isSubmit = !state.isSubmit;
     },
