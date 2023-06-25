@@ -29,13 +29,9 @@ export default function CardForm() {
 
   //! ONSUBMIT FUNCTION IF THERE IS NO ERROR THEN SET ISSUBMIT TRUE
   const onSubmit = (data) => {
-    console.log(data);
-    console.log(Object.keys(errors).length);
     if (Object.keys(errors).length === 0) {
       dispatch(cardformActions.setSubmitTrue());
     }
-
-    console.log("isSubmit-----------" + isSubmit);
   };
 
   return (
