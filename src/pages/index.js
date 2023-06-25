@@ -18,7 +18,6 @@ export default function Home() {
       <main>
         <CardFrontBack />
         {isSubmit ? <ThankYou /> : <CardForm />}
-        {/* <CardForm /> */}
       </main>
     </>
   );
