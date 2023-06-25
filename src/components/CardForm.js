@@ -125,9 +125,12 @@ export default function CardForm() {
                 type="number"
                 name="year"
                 id="year"
+                placeholder="YY"
                 style={{ borderColor: (errors.month || errors.year) && "red" }}
                 {...register("year", {
                   required: "Can't be blank",
+                  min: 10,
+                  max: 99,
                   pattern: {
                     value: /^[0-9]*$/,
                     message: "Enter a valid year",
@@ -136,14 +139,12 @@ export default function CardForm() {
                 onChange={handleInputChange}
               />
             </div>
-
-            {/* {errors.month ||
-              (errors.year && (
-                <span className="error">{`Can't be blank`}</span>
-              ))} */}
+            {/* BELOW CODE TO SHOW VALIDATION MESSAGES COMING FROM REACT HOOK FORM PROPERTIES     */}
             {errors.month || errors.year ? (
               errors.month?.message == "Enter the correct Month" ? (
-                <span className="error">{`Enter a 12 month`}</span>
+                <span className="error">{`Enter a correct month`}</span>
+              ) : errors.year?.type === "min" || errors.year?.type === "max" ? (
+                <span className="error">{`Enter a 2 digit year`}</span>
               ) : errors.month?.message == "Enter a valid year" ||
                 errors.year?.message == "Enter a valid year" ? (
                 <span className="error">{`Enter a valid year`}</span>
@@ -172,15 +173,15 @@ export default function CardForm() {
                 required: "Can't be blank",
                 minLength: {
                   value: 3,
-                  message: "Cvc must be 3 digits long",
+                  message: "CVC must be 3 digits long",
                 },
                 maxLength: {
                   value: 3,
-                  message: "Cvc must be 3 digits long",
+                  message: "CVC must be 3 digits long",
                 },
                 pattern: {
                   value: /^[0-9]*$/,
-                  message: "Cvc must be a Number",
+                  message: "CVC must be a Number",
                 },
               })}
             />
