@@ -39,4 +39,4 @@ npm run dev
 
 ## Demo
 
-https://card-dettails-form-front-end-design-next-app.vercel.app/
+https://card-details-form-front-end-design-next-app.vercel.app/
